@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { User, Role } from '../types';
+import { Role } from '../types';
 
 export default function Members() {
   const { users, userMemberships, membershipPlans, addUser } = useStudioStore();
@@ -29,8 +29,7 @@ export default function Members() {
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !name) return;
-    const newUser: User = {
-      id: Math.random().toString(36).substring(7),
+    const newUser = {
       email,
       name,
       role,

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../stores/authStore';
+import { useStudioStore } from '../stores/studioStore';
 import {
   Calendar,
   Users,
@@ -17,8 +18,13 @@ import { cn } from '@/lib/utils';
 
 export function Layout() {
   const { user, logout } = useAuthStore();
+  const fetchAll = useStudioStore(s => s.fetchAll);
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  useEffect(() => {
+    fetchAll();
+  }, [fetchAll]);
 
   const handleLogout = () => {
     logout();
